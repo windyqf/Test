@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         id="application"
+         point="org.eclipse.core.runtime.applications">
+      <application>
+         <run
+               class="test.intro.Application">
+         </run>
+      </application>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            name="RCP Perspective"
+            class="test.intro.Perspective"
+            id="Test.perspective">
+      </perspective>
+   </extension>
+   <extension
+         id="product"
+         point="org.eclipse.core.runtime.products">
+      <product
+            application="Test.application"
+            name="Test">
+         <property
+               name="windowImages"
+               value="icons/alt_window_16.gif,icons/alt_window_32.gif">
+         </property>
+      </product>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+         <menuContribution locationURI="menu:org.eclipse.ui.main.menu">
+			 <menu
+				id="FileMenu"
+				   label="文件">
+					
+					 <command
+			            commandId="demo.cust"
+			            label="保存"
+			            mnemonic="X"
+			            style="push">
+			         </command>
+					
+			 </menu>
+		</menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.intro">
+      <intro
+            class="org.eclipse.ui.intro.config.CustomizableIntroPart"
+            id="test.intro">
+      </intro>
+      <introProductBinding
+            introId="test.intro"
+            productId="Test.product">
+      </introProductBinding>
+   </extension>
+   <extension
+         point="org.eclipse.ui.intro.config">
+      <config
+            introId="test.intro"
+            content="introContent.xml"
+            id="Test.configId">
+         <presentation
+               home-page-id="root">
+            <implementation
+                  kind="html"
+                  os="win32,linux,macosx">
+            </implementation>
+         </presentation>
+      </config>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.commands">
+         <command
+               id="demo.cust"
+               defaultHandler="test.Handler"
+               name="搜索中心">
+         </command>
+   </extension>
+   
+   <extension point="org.eclipse.ui.editors">
+    <editor
+          class="test.DemoEditor"
+          id="test.DemoEditor"
+          name="搜索结果">
+    </editor>
+ </extension>
+
+</plugin>
